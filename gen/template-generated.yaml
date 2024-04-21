@@ -7,7 +7,13 @@ Resources:
     Properties:
       Handler: app.lambda_handler
       Runtime: python3.11
-      CodeUri: s3://shreyansh-lambda-sam/81e63daa3e7c6ea7015568819a86e761
+      CodeUri: s3://shreyansh-lambda-sam/486e1ac845a64b2ea3dda3acfafaf75b
       Description: A starter lambda function.
       MemorySize: 128
       Timeout: 3
+      Events:
+        HelloWorldSAMAPI:
+          Type: Api
+          Properties:
+            Path: /hello
+            Method: GET

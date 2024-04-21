@@ -12,3 +12,9 @@ Resources:
       Description: A starter lambda function.
       MemorySize: 128
       Timeout: 3
+      Events:
+        HelloWorldSAMAPI:
+          Type: Api
+          Properties:
+            Path: /hello # when we go to /hello with GET method
+            Method: GET  # we should invoke our lambda handler
