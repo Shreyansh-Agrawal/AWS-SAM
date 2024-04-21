@@ -1,6 +1,14 @@
 import json
+import os
+
+import boto3
 
 print('loading function')
+
+# create the client outside the handler
+region_name = os.environ['REGION_NAME']
+dynamo = boto3.client('dynamodb', region_name=region_name)
+table_name = os.environ['TABLE_NAME']
 
 
 def respond(err, res=None):
@@ -14,7 +22,10 @@ def respond(err, res=None):
 
 
 def lambda_handler(event, context):
+    
+    scan_result = dynamo.scan(TableName=table_name)
+    
     print('Event:\n' + json.dumps(event, indent=2))
     print('Context:\n', context)
 
-    return respond(None, res='Hellow SAM from Lambda')
+    return respond(None, res=scan_result)
